@@ -1,3 +1,9 @@
-<h1>
-  {{title}}
-</h1>
+<input #text type="text" (input)="searchBox$.next(text.value)" placeholder="Search..." />
+
+<div class="container">
+  <div *ngFor="let item of (video$ | async)">
+    <a [href]="ytLink(item.id.videoId)" target="_blank" >
+      <img [src]="item.snippet.thumbnails.default.url"/>
+    </a>
+  </div>
+</div>
