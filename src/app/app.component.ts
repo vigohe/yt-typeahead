@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { SearchService } from './search.service';
 import { Component } from '@angular/core';
-import { Subject } from "rxjs/Subject";
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -12,19 +12,22 @@ import 'rxjs/add/operator/distinctUntilChanged';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  searchBox$ : Subject<any> = new Subject<any>();
-  video$ : Observable<any>;
+
+  searchBox$: Subject<any> = new Subject<any>();
+  video$: Observable<any>;
+  isLoading: Boolean = false;
 
 
-  constructor(private searchService:SearchService){
+  constructor(private searchService: SearchService) {
     this.video$ = this.searchBox$
       .debounceTime(500)
       .distinctUntilChanged()
-      .switchMap(input => this.searchService.get(input));
+      .do(() => {this.isLoading = true; })
+      .switchMap(input => this.searchService.get(input).do(() => {
+        this.isLoading = false; }));
   }
 
-  ytLink(videoId : String){
+  ytLink(videoId: String) {
     return `https://www.youtube.com/watch?v=${videoId}`;
   }
 

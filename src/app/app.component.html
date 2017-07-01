@@ -1,9 +1,36 @@
-<input #text type="text" (input)="searchBox$.next(text.value)" placeholder="Search..." />
+<md-toolbar color="primary" style="display: flex">
+  <span>Angular Typeahead</span>
+  <td-search-box #text flex
+                 backIcon="arrow_back"
+                 [showUnderline]="false"
+                 [alwaysVisible]="false"
+                 (input)="searchBox$.next(text.value)">
+  </td-search-box>
+</md-toolbar>
 
-<div class="container">
-  <div *ngFor="let item of (video$ | async)">
-    <a [href]="ytLink(item.id.videoId)" target="_blank" >
-      <img [src]="item.snippet.thumbnails.default.url"/>
-    </a>
-  </div>
-</div>
+<md-progress-bar *ngIf="isLoading" mode="indeterminate" value="100"></md-progress-bar>
+
+<md-tab-group position="1">
+  <md-tab label="Results">
+    <div class="Aligner">
+      <md-card class="Aligner-item" *ngFor="let item of (video$ | async)">
+        <a [href]="ytLink(item.id.videoId)" target="_blank" >
+          <img [src]="item.snippet.thumbnails.high.url"/>
+        </a>
+        <md-card-header>
+          <md-card-title>{{item.snippet.title}}</md-card-title>
+        </md-card-header>
+      </md-card>
+    </div>
+  </md-tab>
+  <md-tab label="json">
+    <td-json-formatter [data]="video$ | async" [levelsOpen]="2">
+    </td-json-formatter>
+  </md-tab>
+</md-tab-group>
+
+
+
+
+
+
