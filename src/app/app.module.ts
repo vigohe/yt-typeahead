@@ -11,7 +11,10 @@ import {CovalentHttpModule} from '@covalent/http';
 import {CovalentHighlightModule} from '@covalent/highlight';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentDynamicFormsModule} from '@covalent/dynamic-forms';
-import {MdCardModule, MdIconModule, MdProgressBarModule, MdTabsModule, MdToolbarModule} from '@angular/material';
+import {
+  MdButtonModule, MdCardModule, MdIconModule, MdProgressBarModule, MdSidenavModule, MdTabsModule,
+  MdToolbarModule
+} from '@angular/material';
 
 
 
@@ -36,7 +39,9 @@ import {MdCardModule, MdIconModule, MdProgressBarModule, MdTabsModule, MdToolbar
     MdCardModule,
     CovalentJsonFormatterModule,
     MdProgressBarModule,
-    MdTabsModule
+    MdTabsModule,
+    MdSidenavModule,
+    MdButtonModule
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]

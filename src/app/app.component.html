@@ -1,4 +1,4 @@
-<md-toolbar color="primary" style="display: flex">
+<md-toolbar class="fixed-header" color="primary" style="display: flex">
   <span>Angular Typeahead</span>
   <td-search-box #text flex
                  backIcon="arrow_back"
@@ -7,11 +7,16 @@
                  (input)="searchBox$.next(text.value)">
   </td-search-box>
 </md-toolbar>
+<div style="margin-top: 64px;">
+  <md-progress-bar *ngIf="isLoading" mode="indeterminate" value="100"></md-progress-bar>
 
-<md-progress-bar *ngIf="isLoading" mode="indeterminate" value="100"></md-progress-bar>
+  <md-sidenav-container>
+    <md-sidenav #sidenav style="width: 50%">
 
-<md-tab-group position="1">
-  <md-tab label="Results">
+      <td-json-formatter [data]="video$ | async" [levelsOpen]="2">
+      </td-json-formatter>
+    </md-sidenav>
+
     <div class="Aligner">
       <md-card class="Aligner-item" *ngFor="let item of (video$ | async)">
         <a [href]="ytLink(item.id.videoId)" target="_blank" >
@@ -22,15 +27,8 @@
         </md-card-header>
       </md-card>
     </div>
-  </md-tab>
-  <md-tab label="json">
-    <td-json-formatter [data]="video$ | async" [levelsOpen]="2">
-    </td-json-formatter>
-  </md-tab>
-</md-tab-group>
+  </md-sidenav-container>
 
+  <button md-raised-button class="example-fab" (click)="sidenav.toggle()">JSON</button>
 
-
-
-
-
+</div>

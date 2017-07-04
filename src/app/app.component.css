@@ -22,3 +22,17 @@
 .Aligner-item {
   width: 480px;
 }
+
+.example-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%  !important;
+}
